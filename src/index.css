@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-sans;
+    @apply text-base;
+    @apply text-blue;
+  }
+
+  h1 {
+    @apply text-3xl;
+    @apply bg-purple;
+  }
+  h2 {
+    @apply text-xl;
+  }
+}
+
+@layer components {
+  .btn-blue {
+    @apply bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded;
+  }
+
+  .layout {
+    @apply w-full max-w-screen-xl mx-auto min-h-screen bg-orange;
+  }
+}
+
+@layer utilities {
+  .filter-none {
+    filter: none;
+  }
+  .filter-grayscale {
+    filter: grayscale(100%);
+  }
+} 
