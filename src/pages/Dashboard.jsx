@@ -17,17 +17,16 @@ export const dashboardLoader = async () => {
   return {username}
 }
 
-export const dashboardAction = async ({request}) => {
+export const dashboardAction = async ({request, response}) => {
   const formData = await request.formData()
   // const username = data.get('username')
   const data = Object.fromEntries(formData) 
   const username = data.username
   try {
-    localStorage.setItem('username', JSON.stringify(username))
-    toast.success(`Welcome, ${username}`)
+    localStorage.setItem('username', username)
+    toast.success(`Successfully created a new account.`)
   } catch(e){
     console.log(e)
-    // toast.error('')
     throw new Error('There was a problem creating your account.')
   }
   return {username}
@@ -38,7 +37,6 @@ const Dashboard = () => {
 
   return (
     <div className='padding-x padding-y'>
-      {/* <h1 className="">Welcome, {username}</h1> */}
       {username ? (<h1 className="">Welcome, {username}</h1>) : (<Intro />)}
     </div>
   )
