@@ -9,3 +9,9 @@ export const fetchData = (key) => {
 //     const data = JSON.parse(localStorage.removeItem(key))
 //     return data
 // }
+
+// ADD USER
+// export const addUser = ({key, value}) => {
+//     // setItem(key, value) 
+//     return localStorage.setItem('username', username)
+// }
