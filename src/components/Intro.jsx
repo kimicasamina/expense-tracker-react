@@ -25,6 +25,7 @@ const Intro = () => {
                     aria-label='Your Name'
                     autoComplete='given-name'
                     />
+                <input type="hidden" name="_action" value="userForm" />
                 <button type="submit" className='mt-4 flex flex-row items-center p-4 bg-saturated-green rounded-md text-white hover:bg-saturated-orange'>
                     <span className="mr-2">CREATE ACCOUNT</span>
                     <FaCirclePlus className='w-4 h-4'/>

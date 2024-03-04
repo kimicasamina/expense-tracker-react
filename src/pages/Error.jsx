@@ -24,7 +24,7 @@ function Error() {
         </button>
         <button 
           className="rounded-md bg-saturated-green text-white flex items-center px-8 py-4 justify-center hover:outline-dotted hover:outline-4 hover:outline-saturated-green hover:outline-offset-4"
-          onClick={() => {navigate('/about')}}
+          onClick={() => {navigate('/')}}
           >
           <FaHouseChimney className='w-[24px] h-[24px] mr-2'/>
           <span className="">Go Home</span>

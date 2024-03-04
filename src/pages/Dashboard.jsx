@@ -9,6 +9,7 @@ import Intro from '../components/Intro'
 
 // toast
 import { toast } from 'react-toastify'
+import BudgetForm from '../components/BudgetForm'
 
 
 
@@ -17,19 +18,49 @@ export const dashboardLoader = async () => {
   return {username}
 }
 
-export const dashboardAction = async ({request, response}) => {
+export const dashboardAction = async ({request}) => {
   const formData = await request.formData()
   // const username = data.get('username')
-  const data = Object.fromEntries(formData) 
-  const username = data.username
-  try {
-    localStorage.setItem('username', username)
-    toast.success(`Successfully created a new account.`)
-  } catch(e){
-    console.log(e)
-    throw new Error('There was a problem creating your account.')
+  const {_action, ...values} = Object.fromEntries(formData) 
+  
+  
+  // console.log(_action, 'action')
+  // console.log(values, 'values')
+  if(_action === 'userForm'){
+    try {
+      console.log(values.username)
+        const username = values.username
+        localStorage.setItem('username', JSON.stringify(username))
+        toast.success(`Successfully created a new account.`)
+        return {username}
+      } catch(e){
+        throw new Error('There was a problem creating your account.')
+        console.log(e)
+      }
   }
-  return {username}
+
+  if(_action === 'budgetForm'){
+    try {
+      // console.log('BUDGET:', values)
+      const newItem = {
+        id: crypto.randomUUID(),
+        name: values.newBudgetName,
+        amount: Number(values.newBudgetAmount),
+        createdAt: Date.now(),
+      }
+
+      // console.log('newItem:', newItem)
+  
+      const existingBudgets = JSON.parse(localStorage.getItem('budgets')) ?? []
+      // console.log('existing budget:', existingBudgets)
+      localStorage.setItem('budgets', JSON.stringify([...existingBudgets, newItem]))
+      // console.log('NEW BUDGET: ', localStorage.getItem('budgets'))
+      return toast.success(`Budget Created!`)
+    } catch(e){
+      throw new Error('There was a problem creating your budget.')
+      console.log(e)
+    }
+  }
 }
 
 const Dashboard = () => {
@@ -37,7 +68,13 @@ const Dashboard = () => {
 
   return (
     <div className='padding-x padding-y'>
-      {username ? (<h1 className="">Welcome, {username}</h1>) : (<Intro />)}
+      {username ? (
+        <div className="">
+          <h1 className="py-10">Welcome, {username}</h1>
+          <BudgetForm />
+        </div>
+      
+      ) : (<Intro />)}
     </div>
   )
 }
