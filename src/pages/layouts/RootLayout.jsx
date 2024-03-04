@@ -15,7 +15,7 @@ const RootLayout = () => {
   const {username} = useLoaderData()
   return (
     <div className='layout'>
-        <Nav />
+        <Nav username={username}/>
         <main className="">
             <Outlet />
         </main>

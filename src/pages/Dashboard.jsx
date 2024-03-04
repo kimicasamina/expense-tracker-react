@@ -13,8 +13,7 @@ const Dashboard = () => {
   const {username} = useLoaderData()
   return (
     <div className='padding-x padding-y'>
-      <h1 className="">Welcome! {username}</h1>
-      {/* <p>{username}</p> */}
+      <h1 className="">Welcome, {username}</h1>
     </div>
   )
 }

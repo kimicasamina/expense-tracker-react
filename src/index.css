@@ -8,7 +8,7 @@
   body {
     @apply font-sans;
     @apply text-base;
-    @apply text-gray-dark;
+    @apply text-dark;
   }
 
   h1 {
@@ -23,8 +23,10 @@
   }
 
   .btn {
-    @apply px-4 py-2 border border-gray-dark rounded-lg bg-gray-dark text-white;
-    @apply hover:border hover:border-gray-dark hover:bg-white hover:text-gray-dark;
+    /* @apply px-4 py-2 border border-gray-dark rounded-lg bg-gray-dark text-white;
+    @apply hover:border hover:border-gray-dark hover:bg-white hover:text-gray-dark; */
+    @apply px-6 py-4 rounded-md border-4 border-saturated-orange text-saturated-orange;
+    @apply hover:border-dark hover:text-dark;
   }
 
 }
