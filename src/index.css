@@ -29,6 +29,12 @@
     @apply hover:border-dark hover:text-dark;
   }
 
+  .form {
+    @apply w-full rounded-md shadow-ninja flex-1;
+    @apply rounded-md outline-2 -outline-offset-8 outline-dashed m-2 gap-y-8 p-10;
+  }
+
+
 }
 
 @layer utilities {
@@ -39,6 +45,10 @@
 
   .padding-y {
     @apply py-[40px];
+  }
+
+  .shadow-ninja {
+    box-shadow: 0 3px 7px 0 rgba(0, 0, 0, .13), 0 1px 2px 0 rgba(0, 0, 0, .11);
   }
 
   .filter-none {

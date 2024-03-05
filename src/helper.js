@@ -4,11 +4,10 @@ export const fetchData = (key) => {
     return data
 }
 
-export const simulateFetchingData = async () => {
-    setTimeout(() => {
-        console.log('Fetching data...')
-    }, 2000);
-}
+// wait for 1 sec
+export const wait = new Promise(resolve => setTimeout(resolve, 1000));
+
+
 
 
 // DELETE USER

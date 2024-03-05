@@ -21,51 +21,51 @@ const BudgetForm = () => {
     }, [isSubmitting])
 
   return (
-    <div className="w-full max-w-3xl mx-auto rounded-md shadow-xl flex flex-col md:flex-row">
-        <div className="flex-1 rounded-md outline-2 -outline-offset-4 outline-dashed m-2 flex flex-col gap-y-8 p-10">
-            <fetcher.Form method='post' className='flex flex-col gap-y-6' ref={formRef}>
-                <div className="flex flex-col gap-y-2">
-                    <label htmlFor="newBudgetName" className="">Create Budget:</label>
-                    <input 
-                        type="text" 
-                        className="outline-none border rounded-md p-2 focus:border-saturated-green focus:outline-saturated-green"
-                        name="newBudgetName"
-                        placeholder='e.g, Groceries'
-                        required
-                        ref={focusRef}
-                        />
-                </div>
-                <div className="flex flex-col gap-y-2">
-                    <label htmlFor="newBudgetAmount" className="">Amount:</label>
-                    <input 
-                        type="number" 
-                        step='0.01'
-                        className="outline-none border rounded-md p-2 focus:border-saturated-green focus:outline-saturated-green"
-                        name="newBudgetAmount"
-                        placeholder='e.g, 200'
-                        required
-                        inputMode='decimal'
-                        
+    // <div className="w-full mx-auto rounded-md shadow-ninja flex flex-col md:flex-row">
+    // </div>
+    <div className="form ">
+        <fetcher.Form method='post' className='flex flex-col gap-y-6' ref={formRef}>
+            <div className="flex flex-col gap-y-2">
+                <label htmlFor="newBudgetName" className="">Create Budget:</label>
+                <input 
+                    type="text" 
+                    className="outline-none border rounded-md p-2 focus:border-saturated-green focus:outline-saturated-green"
+                    name="newBudgetName"
+                    placeholder='e.g, Groceries'
+                    required
+                    ref={focusRef}
                     />
-                </div>
-                <input type="hidden" name="_action" value="budgetForm" />
-                <button 
-                    type="submit" 
-                    className='rounded-md bg-saturated-green text-white flex items-center px-8 py-4 justify-center hover:bg-saturated-orange mt-6'
-                    disabled={isSubmitting}
-                    >
-                    {
-                        isSubmitting ? <span>Submitting...</span> : (
-                            <>
-                                <span className="mr-2">Create Budget</span>
-                                <FaCirclePlus />
-                            </>
-                        )
-                    }
+            </div>
+            <div className="flex flex-col gap-y-2">
+                <label htmlFor="newBudgetAmount" className="">Amount:</label>
+                <input 
+                    type="number" 
+                    step='0.01'
+                    className="outline-none border rounded-md p-2 focus:border-saturated-green focus:outline-saturated-green"
+                    name="newBudgetAmount"
+                    placeholder='e.g, 200'
+                    required
+                    inputMode='decimal'
                     
-                </button>
-            </fetcher.Form>
-        </div>
+                />
+            </div>
+            <input type="hidden" name="_action" value="budgetForm" />
+            <button 
+                type="submit" 
+                className={`${isSubmitting ? 'opacity-50' : ''} rounded-md bg-saturated-green text-white flex items-center px-8 py-4 justify-center hover:bg-saturated-orange mt-6`}
+                disabled={isSubmitting}
+                >
+                {
+                    isSubmitting ? <span>Submitting...</span> : (
+                        <>
+                            <span className="mr-2">Create Budget</span>
+                            <FaCirclePlus />
+                        </>
+                    )
+                }
+                
+            </button>
+        </fetcher.Form>
     </div>
   )
 }
