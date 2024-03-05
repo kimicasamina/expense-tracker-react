@@ -1,13 +1,29 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Form } from 'react-router-dom'
+import { useFetcher } from 'react-router-dom';
 
 import { FaCirclePlus } from "react-icons/fa6";
 
 const BudgetForm = () => {
+    const fetcher = useFetcher()
+    const isSubmitting = fetcher.state === 'submitting'
+    const formRef = useRef()
+    const focusRef = useRef()
+
+    useEffect(() => {
+        if (!isSubmitting){
+            // clear or resets form inputs
+            formRef.current.reset()
+
+            // bring the focus back to the createNewBudget input
+            focusRef.current.focus()
+        }
+    }, [isSubmitting])
+
   return (
-    <div className="rounded-md shadow-xl flex flex-col md:flex-row">
+    <div className="w-full max-w-3xl mx-auto rounded-md shadow-xl flex flex-col md:flex-row">
         <div className="flex-1 rounded-md outline-2 -outline-offset-4 outline-dashed m-2 flex flex-col gap-y-8 p-10">
-            <Form method='post' className='flex flex-col gap-y-6'>
+            <fetcher.Form method='post' className='flex flex-col gap-y-6' ref={formRef}>
                 <div className="flex flex-col gap-y-2">
                     <label htmlFor="newBudgetName" className="">Create Budget:</label>
                     <input 
@@ -16,6 +32,7 @@ const BudgetForm = () => {
                         name="newBudgetName"
                         placeholder='e.g, Groceries'
                         required
+                        ref={focusRef}
                         />
                 </div>
                 <div className="flex flex-col gap-y-2">
@@ -32,14 +49,23 @@ const BudgetForm = () => {
                     />
                 </div>
                 <input type="hidden" name="_action" value="budgetForm" />
-                <button type="submit" className='rounded-md bg-saturated-green text-white flex items-center px-8 py-4 justify-center hover:bg-saturated-orange mt-6'>
-                    <span className="mr-2">Create Budget</span>
-                    <FaCirclePlus />
+                <button 
+                    type="submit" 
+                    className='rounded-md bg-saturated-green text-white flex items-center px-8 py-4 justify-center hover:bg-saturated-orange mt-6'
+                    disabled={isSubmitting}
+                    >
+                    {
+                        isSubmitting ? <span>Submitting...</span> : (
+                            <>
+                                <span className="mr-2">Create Budget</span>
+                                <FaCirclePlus />
+                            </>
+                        )
+                    }
+                    
                 </button>
-            </Form>
+            </fetcher.Form>
         </div>
-
-
     </div>
   )
 }

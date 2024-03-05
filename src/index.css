@@ -34,7 +34,7 @@
 @layer utilities {
 
   .padding-x {
-    @apply px-[40px];
+    @apply px-[30px];
   }
 
   .padding-y {

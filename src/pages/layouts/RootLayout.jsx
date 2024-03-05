@@ -14,7 +14,7 @@ export const RootLayoutLoader = async () => {
 const RootLayout = () => {
   const {username} = useLoaderData()
   return (
-    <div className='layout'>
+    <div className=''>
         <Nav username={username}/>
         <main className="">
             <Outlet />

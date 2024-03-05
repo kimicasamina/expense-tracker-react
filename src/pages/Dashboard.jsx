@@ -2,7 +2,7 @@ import React from 'react'
 import { useLoaderData } from 'react-router-dom'
 
 // helpers
-import { fetchData } from '../helper'
+import { fetchData, simulateFetchingData } from '../helper'
 
 // components
 import Intro from '../components/Intro'
@@ -30,7 +30,7 @@ export const dashboardAction = async ({request}) => {
     try {
       console.log(values.username)
         const username = values.username
-        localStorage.setItem('username', JSON.stringify(username))
+        localStorage.setItem('username', username)
         toast.success(`Successfully created a new account.`)
         return {username}
       } catch(e){
@@ -39,9 +39,13 @@ export const dashboardAction = async ({request}) => {
       }
   }
 
+
   if(_action === 'budgetForm'){
+
+    // wait for 1 sec
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
     try {
-      // console.log('BUDGET:', values)
       const newItem = {
         id: crypto.randomUUID(),
         name: values.newBudgetName,
@@ -67,10 +71,10 @@ const Dashboard = () => {
   const {username} = useLoaderData()
 
   return (
-    <div className='padding-x padding-y'>
+    <div className='w-full max-w-screen-xl mx-auto padding-y padding-x'>
       {username ? (
         <div className="">
-          <h1 className="py-10">Welcome, {username}</h1>
+          <h1 className="py-10">Welcome, <span className="font-semibold text-saturated-orange">{username}</span> </h1>
           <BudgetForm />
         </div>
       

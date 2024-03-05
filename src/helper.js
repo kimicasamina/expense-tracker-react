@@ -4,6 +4,13 @@ export const fetchData = (key) => {
     return data
 }
 
+export const simulateFetchingData = async () => {
+    setTimeout(() => {
+        console.log('Fetching data...')
+    }, 2000);
+}
+
+
 // DELETE USER
 // export const deleteUser = (key) => {
 //     const data = JSON.parse(localStorage.removeItem(key))

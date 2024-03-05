@@ -11,7 +11,7 @@ import wallet_illustration from '../assets/wallet_illustration.svg'
 
 const Intro = () => {
   return (
-    <div className='flex flex-row items-end'>
+    <div className='flex flex-row items-center relative'>
         <div className="flex-1 flex flex-col gap-y-10">
             <h1 className="">Take Control of <span className='text-saturated-orange'>Your Money</span></h1>
             <p className="">Personal budgeting is the secret to financial freedom. Start your journey today.</p>
@@ -32,7 +32,9 @@ const Intro = () => {
                 </button>
             </Form>
         </div>
-        <img src={wallet_illustration} alt="girl" className='flex-1 h-[500px]' />
+        <div className="flex-1 flex justify-end">
+            <img src={wallet_illustration} alt="girl" className='h-[500px]' />
+        </div>
         
     </div>
   )
