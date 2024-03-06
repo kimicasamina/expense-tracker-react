@@ -1,12 +1,15 @@
 // FETCH DATA FROM LOCALSTORAGE
 export const fetchData = (key) => {
-    const data = localStorage.getItem(key)
+    const data = JSON.parse(localStorage.getItem(key))
     return data
 }
 
 // wait for 1 sec
-export const wait = new Promise(resolve => setTimeout(resolve, 1000));
-
+export const simulateDataFetching = () => {
+    setTimeout(() => {
+        console.log('Helloooo')
+    }, 2000)
+}
 
 // total spent by budget
 export const calculateSpentbyBudget = (budgetId) => {
@@ -26,6 +29,17 @@ export const formatCurrency = (amt) => {
         style: 'currency',
         currency: 'PHP'
     })
+}
+
+export const formatPercentage = (amt) => {
+    return amt.toLocaleString(undefined, {
+        style: "percent",
+        minimumFractionDigits: 0,
+    })
+}
+
+export const formatDate = (date) => {
+    return new Date(date).toLocaleDateString()
 }
 
 // DELETE USER

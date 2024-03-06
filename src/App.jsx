@@ -17,6 +17,7 @@ import RootLayout, { RootLayoutLoader } from './pages/layouts/RootLayout';
 import Error from './pages/Error';
 import { logoutAction } from './actions/logoutAction';
 import About from './pages/About';
+import ExpensesPage, { expensesPageLoader } from './pages/ExpensesPage';
 
 const router = createBrowserRouter([
   {
@@ -33,12 +34,13 @@ const router = createBrowserRouter([
         errorElement: <Error />,
       },
       {
-        path: 'logout',
-        action: logoutAction,
+        path: 'expenses',
+        element: <ExpensesPage />,
+        loader: expensesPageLoader,
       },
       {
-        path: 'about',
-        element: <About/>
+        path: 'logout',
+        action: logoutAction,
       },
     ]
   },

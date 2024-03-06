@@ -1,9 +1,8 @@
 import React from 'react'
-import { useLoaderData } from 'react-router-dom'
+import { Link, useLoaderData } from 'react-router-dom'
 
 // helpers
-import { fetchData } from '../helper'
-import { wait } from '../helper'
+import { fetchData, simulateDataFetching } from '../helper'
 
 // components
 import Intro from '../components/Intro'
@@ -13,23 +12,28 @@ import BudgetItem from '../components/BudgetItem'
 
 // toast
 import { toast } from 'react-toastify'
+import Table from '../components/Table'
 
 
 
 export const dashboardLoader = async () => {
-  const username = JSON.parse(localStorage.getItem('username'))
-  const budgets = JSON.parse(localStorage.getItem('budgets'))
-  const expenses = JSON.parse(localStorage.getItem('expenses'))
-
-  return {username, budgets, expenses}
+  try {
+    const username = fetchData('username')
+    const budgets = fetchData('budgets')
+    const expenses = fetchData('expenses')
+  
+    return {username, budgets, expenses}
+  } catch(e){
+    console.log(e)
+    throw new Error(e)
+  }
 }
 
 export const dashboardAction = async ({request}) => {
-  // wait()
-  await new Promise(resolve => setTimeout(resolve, 1000));
 
-  
   const formData = await request.formData()
+
+  // wait
   const {_action, ...values} = Object.fromEntries(formData) 
   
   
@@ -105,6 +109,8 @@ const Dashboard = () => {
                   </div>
                   <div className="flex flex-col">
                     <h2 className='text-2xl'>Existing Budgets</h2>
+
+                    
                     <div className="">
                       {budgets.map(budget => {
                         return(
@@ -114,6 +120,21 @@ const Dashboard = () => {
                         )
                       })}
                     </div>
+
+                    {expenses && expenses.length > 0 && (
+                      <div className="padding-y">
+                        <h2 className="font-semibold text-4xl my-6">Existing Expenses</h2>
+                        <Table expenses={
+                          expenses.sort((createdAtA, createdAtB) => {
+                            return (createdAtA.createdAt - createdAtB.createdAtB)
+                          }).slice(0,5)
+                        } />
+                        {expenses.length > 5 && (
+                          <Link to='/expenses' className='bg-dark rounded-md text-white w-full md:w-[220px] py-4 my-4 md:my-8 flex items-center justify-center shadow-md cursor-pointer'>View all Expenses</Link>
+                        )}
+                      </div>
+                    )}
+                    
                   </div>
                 </div>
               ) : (

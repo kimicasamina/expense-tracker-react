@@ -1,9 +1,12 @@
 import React from 'react'
-import { calculateSpentbyBudget, formatCurrency } from '../helper'
+import { calculateSpentbyBudget, formatCurrency, formatPercentage } from '../helper'
 
 const BudgetItem = ({key, budget}) => {
     const {id, name, createdAt, amount} = budget
     const spent = calculateSpentbyBudget(id)
+
+  
+
   return (
     <>
         <div className="flex flex-col gap-y-2 rounded-xl border-2 shadow-md p-4 mb-4">
@@ -15,7 +18,9 @@ const BudgetItem = ({key, budget}) => {
                 </p>
             </div>
             <progress max={amount} value={spent}>
-                {/* {120} */}
+                <span>
+                    {(spent / amount)}
+                </span>
             </progress>
             <div className="flex justify-between">
                 <small className="">{formatCurrency(spent)} spent</small>
