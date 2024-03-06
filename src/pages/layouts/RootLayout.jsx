@@ -1,6 +1,6 @@
 // react imports
 import React from 'react'
-import { Outlet, useLoaderData } from 'react-router-dom'
+import { Outlet, useLoaderData, useRouteError } from 'react-router-dom'
 
 // components
 import Nav from '../../components/Nav'
@@ -13,6 +13,8 @@ export const RootLayoutLoader = async () => {
 
 const RootLayout = () => {
   const {username} = useLoaderData()
+  const error = useRouteError()
+  
   return (
     <div className=''>
         <Nav username={username}/>

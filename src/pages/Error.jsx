@@ -17,14 +17,14 @@ function Error() {
       <div className="w-full max-w-[450px] flex flex-col gap-y-4 md:flex-row justify-evenly mt-10">
         <button 
           className="rounded-md bg-saturated-green text-white flex items-center px-8 py-4 justify-center hover:outline-dotted hover:outline-4 hover:outline-saturated-green hover:outline-offset-4"
-          onClick={navigate(-1)}
+          onClick={() => {navigate(-1)}}
           >
           <FaAngleLeft className='w-[24px] h-[24px] mr-2'/>
           <span className=''>Go Back</span>
         </button>
         <button 
           className="rounded-md bg-saturated-green text-white flex items-center px-8 py-4 justify-center hover:outline-dotted hover:outline-4 hover:outline-saturated-green hover:outline-offset-4"
-          onClick={redirect('/')}
+          onClick={() => {redirect('/')}}
           >
           <FaHouseChimney className='w-[24px] h-[24px] mr-2'/>
           <span className="">Go Home</span>

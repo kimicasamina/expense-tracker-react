@@ -18,6 +18,13 @@ const ExpenseForm = ({budgets}) => {
     }, [isSubmitting])
   return (
     <div className="form">
+        <p className="mb-2 text-2xl">
+            <span>Create New{' '}</span>
+            {budgets.length === 1 ? (<span className='text-saturated-green font-semibold'>{
+                budgets.map(budget => budget.name)
+            }</span>) : (null)}
+            <span>{' '}Expense</span>
+        </p>
         <fetcher.Form method='post' className='flex flex-col gap-y-6' ref={formRef}>
             <div className="flex flex-col gap-y-2">
                 <label htmlFor="newExpenseName" className="">
@@ -46,7 +53,12 @@ const ExpenseForm = ({budgets}) => {
                     required
                 />
             </div>
-            <select name="newExpenseCategory" id="newExpenseCategory">
+            <select 
+            name="newExpenseCategory" 
+            id="newExpenseCategory" 
+            className='outline-none border rounded-md p-2 focus:border-saturated-green focus:outline-saturated-green'
+            hidden={budgets.length === 1}
+            >
             {
                 budgets && budgets.map((budget) => {
                     return(
@@ -57,12 +69,11 @@ const ExpenseForm = ({budgets}) => {
             </select>
             <input type="hidden" name="_action" value="expenseForm" />
             <button 
-                type="submit" 
-                className='rounded-md bg-saturated-green text-white flex items-center px-8 py-4 justify-center hover:bg-saturated-orange mt-6'
+                className={`${isSubmitting ? 'opacity-50' : ''} rounded-md bg-saturated-green text-white flex items-center px-8 py-4 justify-center hover:bg-saturated-orange mt-6`}
                 disabled={isSubmitting}
                 >
                 {
-                    isSubmitting ? <span>Submitting...</span> : (
+                    isSubmitting ? <span className=''>Submitting...</span> : (
                         <>
                             <span className="mr-2">Create Expense</span>
                             <FaCirclePlus />

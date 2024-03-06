@@ -3,17 +3,16 @@ import { useLoaderData } from 'react-router-dom'
 
 // helpers
 import { fetchData } from '../helper'
+import { wait } from '../helper'
 
 // components
 import Intro from '../components/Intro'
-
-// helpers 
-import { wait } from '../helper'
+import BudgetForm from '../components/BudgetForm'
+import ExpenseForm from '../components/ExpenseForm'
+import BudgetItem from '../components/BudgetItem'
 
 // toast
 import { toast } from 'react-toastify'
-import BudgetForm from '../components/BudgetForm'
-import ExpenseForm from '../components/ExpenseForm'
 
 
 
@@ -30,6 +29,9 @@ export const dashboardLoader = async () => {
 
 export const dashboardAction = async ({request}) => {
   // wait()
+  await new Promise(resolve => setTimeout(resolve, 1000));
+
+  
   const formData = await request.formData()
   // const username = data.get('username')
   const {_action, ...values} = Object.fromEntries(formData) 
@@ -52,7 +54,7 @@ export const dashboardAction = async ({request}) => {
 
   if(_action === 'budgetForm'){
 
-    // await new Promise(resolve => setTimeout(resolve, 1000));
+
 
     try {
       const newItem = {
@@ -112,9 +114,23 @@ const Dashboard = () => {
           <div className="">
             {budgets && budgets.length > 0 
               ? (
-                <div className='flex flex-col md:flex-row'>
-                  <BudgetForm />
-                  <ExpenseForm budgets={budgets} />
+                <div className="">
+                  <div className='flex flex-col md:flex-row'>
+                    <BudgetForm />
+                    <ExpenseForm budgets={budgets} />
+                  </div>
+                  <div className="flex flex-col">
+                    <h2 className='text-2xl'>Existing Budgets</h2>
+                    <div className="">
+                      {budgets.map(budget => {
+                        return(
+                          <div className="" key={budget.id}>
+                            <BudgetItem  budget={budget} />
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
                 </div>
               ) : (
                 <div className="flex flex-col">

@@ -8,7 +8,25 @@ export const fetchData = (key) => {
 export const wait = new Promise(resolve => setTimeout(resolve, 1000));
 
 
+// total spent by budget
+export const calculateSpentbyBudget = (budgetId) => {
+    const expenses = JSON.parse(localStorage.getItem('expense')) ?? []
+    const budgetSpent = expenses.reduce((acc, expense) => {
+        if (expense.budgetId !== budgetId){
+            return acc
+        } 
+        return acc += expense.amount
+    }, 0)
+    return budgetSpent
+}
 
+// format currency
+export const formatCurrency = (amt) => {
+    return amt.toLocaleString(undefined, {
+        style: 'currency',
+        currency: 'PHP'
+    })
+}
 
 // DELETE USER
 // export const deleteUser = (key) => {
