@@ -10,7 +10,7 @@ export const wait = new Promise(resolve => setTimeout(resolve, 1000));
 
 // total spent by budget
 export const calculateSpentbyBudget = (budgetId) => {
-    const expenses = JSON.parse(localStorage.getItem('expense')) ?? []
+    const expenses = JSON.parse(localStorage.getItem('expenses')) ?? []
     const budgetSpent = expenses.reduce((acc, expense) => {
         if (expense.budgetId !== budgetId){
             return acc

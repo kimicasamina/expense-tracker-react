@@ -17,14 +17,11 @@ import { toast } from 'react-toastify'
 
 
 export const dashboardLoader = async () => {
-  // const username = fetchData('username')
-  // const budgets = fetchData('budgets')
   const username = JSON.parse(localStorage.getItem('username'))
   const budgets = JSON.parse(localStorage.getItem('budgets'))
-  const expense = JSON.parse(localStorage.getItem('expense'))
-  // console.log(use)
-  // console.log(budgets.canApprove)
-  return {username, budgets, expense}
+  const expenses = JSON.parse(localStorage.getItem('expenses'))
+
+  return {username, budgets, expenses}
 }
 
 export const dashboardAction = async ({request}) => {
@@ -33,15 +30,11 @@ export const dashboardAction = async ({request}) => {
 
   
   const formData = await request.formData()
-  // const username = data.get('username')
   const {_action, ...values} = Object.fromEntries(formData) 
   
   
-  // console.log(_action, 'action')
-  // console.log(values, 'values')
   if(_action === 'userForm'){
     try {
-      console.log(values.username)
         const username = values.username
         localStorage.setItem('username', JSON.stringify(username))
         return toast.success(`Successfully created a new account.`)
@@ -53,9 +46,6 @@ export const dashboardAction = async ({request}) => {
 
 
   if(_action === 'budgetForm'){
-
-
-
     try {
       const newItem = {
         id: crypto.randomUUID(),
@@ -64,17 +54,11 @@ export const dashboardAction = async ({request}) => {
         createdAt: Date.now(),
       }
 
-      // console.log('newItem:', newItem)
-  
       const existingBudgets = JSON.parse(localStorage.getItem('budgets')) ?? []
-      // console.log('existing budget:', existingBudgets)
       localStorage.setItem('budgets', JSON.stringify([...existingBudgets, newItem]))
-      // console.log('NEW BUDGET: ', localStorage.getItem('budgets'))
       return toast.success(`Budget Created!`)
-      console.log('BUDGETS:', budgets)
     } catch(e){
       throw new Error('There was a problem creating your budget.')
-      console.log(e)
     }
   }
 
@@ -89,8 +73,8 @@ export const dashboardAction = async ({request}) => {
       }
 
       // check if expense is empty
-      const existingExpense = JSON.parse(localStorage.getItem('expense')) ?? []
-      localStorage.setItem('expense', JSON.stringify([...existingExpense, newItem]))
+      const existingExpense = JSON.parse(localStorage.getItem('expenses')) ?? []
+      localStorage.setItem('expenses', JSON.stringify([...existingExpense, newItem]))
 
       // return toast message
       return toast.success('New expense created!')
@@ -103,7 +87,7 @@ export const dashboardAction = async ({request}) => {
 }
 
 const Dashboard = () => {
-  const {username, budgets, expense} = useLoaderData()
+  const {username, budgets, expenses} = useLoaderData()
 
   return (
     <>
