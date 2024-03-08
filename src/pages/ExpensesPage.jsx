@@ -5,11 +5,11 @@ import Table from '../components/Table'
 
 export const expensesPageLoader = async () => {
     const expenses = JSON.parse(localStorage.getItem('expenses')) ?? []
-    return expenses
+    return {expenses}
 }
 
 const ExpensesPage = () => {
-    const expenses = useLoaderData()
+    const {expenses} = useLoaderData()
     
   return (
     <div className="">

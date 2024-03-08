@@ -1,8 +1,11 @@
 import React from 'react'
 import { fetchData } from '../helper'
-import { useLoaderData } from 'react-router-dom'
+import { useLoaderData, useParams } from 'react-router-dom'
 import BudgetItem from '../components/BudgetItem'
 import ExpenseForm from '../components/ExpenseForm'
+import ExpenseItem from '../components/ExpenseItem'
+import ExpensesPage from './ExpensesPage'
+import Table from '../components/Table'
 
 export const budgetPageLoader = async ({ params }) => {
   const budgets = fetchData('budgets')
@@ -14,17 +17,22 @@ export const budgetPageLoader = async ({ params }) => {
     }
   })[0] 
 
-  return {budget}
+  const expenses = fetchData('expenses')
+
+  return {budget, budgets, expenses}
 }
 
 const BudgetPage = () => {
-  const { budget } = useLoaderData()
+  const { budget, budgets, expenses } = useLoaderData()
+  const {id} = useParams()
 
   return (
     <div className="">
       {budget && <h1>{budget.name} Overview</h1>}
       <BudgetItem budget={budget}/>
-      <ExpenseForm budgets={budget}/>
+      <ExpenseForm budgets={budgets.filter(budget => {return (budget.id === id)})}/>
+      <ExpensesPage />
+      {/* <Table expenses={expenses}/> */}
     </div>
   )
 }

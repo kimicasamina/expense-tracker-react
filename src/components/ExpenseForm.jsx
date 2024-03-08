@@ -8,7 +8,6 @@ const ExpenseForm = ({budgets}) => {
     const isSubmitting = fetcher.state === 'submitting'
     const formRef = useRef()
     const focusRef = useRef()
-    console.log(typeof budgets)
 
     useEffect(() => {
         if(!isSubmitting){
@@ -18,13 +17,14 @@ const ExpenseForm = ({budgets}) => {
     }, [isSubmitting])
   return (
     <div className="form">
-        <p className="mb-2 text-2xl">
-            <span>Create New{' '}</span>
-            {budgets.length === 1 ? (<span className='text-saturated-green font-semibold'>{
-                budgets.map(budget => budget.name)
-            }</span>) : (null)}
-            <span>{' '}Expense</span>
-        </p>
+        <h2 className="mb-2 text-2xl">Add New{' '}
+            <span className='font-3xl text-red-300'>
+                {budgets.length === 1 && budgets.map(budget => {
+                    return budget.name
+                })}
+            </span>
+            {' '}Expense
+        </h2>
         <fetcher.Form method='post' className='flex flex-col gap-y-6' ref={formRef}>
             <div className="flex flex-col gap-y-2">
                 <label htmlFor="newExpenseName" className="">
@@ -57,14 +57,14 @@ const ExpenseForm = ({budgets}) => {
             name="newExpenseCategory" 
             id="newExpenseCategory" 
             className='outline-none border rounded-md p-2 focus:border-saturated-green focus:outline-saturated-green'
-            hidden={budgets.length === 1}
+            hidden={budgets.length === 1 }
             >
             {
-                budgets && budgets.map((budget) => {
+                budgets.map((budget) => {
                     return(
                         <option value={budget.id} key={budget.id} className="">{budget.name}</option>
                     )
-                })
+                }) 
             }
             </select>
             <input type="hidden" name="_action" value="expenseForm" />
