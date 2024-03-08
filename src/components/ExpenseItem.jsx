@@ -10,9 +10,9 @@ const ExpenseItem = ({expense}) => {
 
   return (
     <>
-        <td>{expense.name}</td>
-        <td>{formatCurrency(expense.amount)}</td>
-        <td>{formatDate(expense.createdAt)}</td>
+        <td>{name}</td>
+        <td>{formatCurrency(amount)}</td>
+        <td>{formatDate(createdAt)}</td>
         <td>
             <Link to={`/budgets/${budgetId}`}>
                 {
@@ -27,7 +27,7 @@ const ExpenseItem = ({expense}) => {
         <td>
             <Form method="post">
                 <input type="hidden" name='_action' value="deleteExpenseForm" />
-                <input type="hidden" name='expenseId' value={expense.id} />
+                <input type="hidden" name='expenseId' value={id} />
                 <button type="submit">
                     <FaRegTrashCan />
                 </button>
