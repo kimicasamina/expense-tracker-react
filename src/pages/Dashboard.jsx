@@ -88,6 +88,22 @@ export const dashboardAction = async ({request}) => {
       console.log(e)
     }
   }
+
+  if(_action === 'deleteExpenseForm'){
+    try{
+      const existingExpenses = JSON.parse(localStorage.getItem('expenses')) ?? []
+      const newExpense = existingExpenses.filter(expense => {
+        if (expense.id !== values.expenseId){
+          return expense
+        }
+      })
+      localStorage.setItem('expenses', JSON.stringify(newExpense))
+      return toast.success(`Succesfully deleted an item`)
+    }catch(e){
+      console.log(e)
+      throw new Error(e.message)
+    }
+  }
 }
 
 const Dashboard = () => {

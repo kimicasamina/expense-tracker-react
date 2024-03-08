@@ -4,7 +4,8 @@ import { toast } from 'react-toastify';
 export const logoutAction = async () => {
     // Delete user
     localStorage.removeItem('username')
-    console.log('actions')
+    localStorage.removeItem('budgets')
+    localStorage.removeItem('expenses')
 
     toast.success('Success!')
 
