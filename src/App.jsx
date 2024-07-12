@@ -18,7 +18,8 @@ import Error from './pages/Error';
 import { logoutAction } from './actions/logoutAction';
 import About from './pages/About';
 import ExpensesPage, { expensesPageLoader } from './pages/ExpensesPage';
-import BudgetPage, { budgetPageLoader } from './pages/BudgetPage';
+import BudgetPage, { budgetPageAction, budgetPageLoader } from './pages/BudgetPage';
+import { deleteBudgetAction } from './actions/deleteBudgetAction';
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,13 @@ const router = createBrowserRouter([
         path: 'budgets/:id',
         element: <BudgetPage />,
         loader: budgetPageLoader,
+        action: budgetPageAction,
+        children: [
+          {
+            path: 'delete',
+            action: deleteBudgetAction
+          },
+        ]
       },
       {
         path: 'expenses',

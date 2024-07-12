@@ -4,14 +4,14 @@ import { Link, useLoaderData } from 'react-router-dom'
 // helpers
 import { fetchData, simulateDataFetching } from '../helper'
 
+// toast
+import { toast } from 'react-toastify'
+
 // components
 import Intro from '../components/Intro'
 import BudgetForm from '../components/BudgetForm'
 import ExpenseForm from '../components/ExpenseForm'
 import BudgetItem from '../components/BudgetItem'
-
-// toast
-import { toast } from 'react-toastify'
 import Table from '../components/Table'
 
 
@@ -131,7 +131,7 @@ const Dashboard = () => {
                       {budgets.map(budget => {
                         return(
                           <div className="" key={budget.id}>
-                            <BudgetItem  budget={budget} />
+                            <BudgetItem budget={budget} />
                           </div>
                         )
                       })}

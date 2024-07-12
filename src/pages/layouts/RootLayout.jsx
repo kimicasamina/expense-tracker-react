@@ -16,7 +16,7 @@ const RootLayout = () => {
   const error = useRouteError()
   
   return (
-    <div className=''>
+    <div className='w-full max-w-screen-lg mx-auto padding-x'>
         <Nav username={username}/>
         <main className="">
             <Outlet />
